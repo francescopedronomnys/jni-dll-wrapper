@@ -1,0 +1,17 @@
+#RUN cinterop -def libcurl.def -compiler-option -Ilibcurl\include -o libcurl from C:\Users\Francesco\IdeaProjects\http-client\src\nativeInterop\cinterop
+
+#headers = curl/curl.h
+#package = libcurl
+#headerFilter = curl/*
+
+package = libcurl
+headers = curl.h
+headerFilter = *
+linkerOpts.mingw_x64 =  -LC:/Tools/msys64/mingw64/lib -l:libcurl.lib
+compilerOpts.mingw_x64 = -IC:/Tools/msys64/mingw64/include/curl
+#linkerOpts.osx = -L/opt/local/lib -L/usr/local/opt/curl/lib -lcurl -L/opt/homebrew/opt/curl/include/curl
+#compilerOpts.osx = -I/opt/local/include/curl -I/usr/bin/curl -I/usr/local/include/curl -I/usr/include/curl -I/usr/local/Cellar/curl/7.80.0_1/include/curl -I/usr/local/Cellar/curl/7.80.0/include/curl -I/usr/local/Cellar/curl/7.62.0/include/curl -I/usr/local/Cellar/curl/7.63.0/include/curl -I/usr/local/Cellar/curl/7.65.3/include/curl -I/usr/local/Cellar/curl/7.66.0/include/curl -I/opt/homebrew/opt/curl/include/curl
+#linkerOpts.linux = -L/usr/lib64 -L/usr/lib/x86_64-linux-gnu -lcurl -L/opt/homebrew/opt/curl/include/curl
+#compilerOpts.linux = -I/usr/include/curl -I/usr/include/x86_64-linux-gnu/curl -I/opt/homebrew/opt/curl/include/curl
+#-LC:/Tools/msys2/mingw64/lib -lcurl -L/opt/homebrew/opt/curl/include/curl
+# compilerOpts.mingw_x64 = -I/usr/include/curl -I/usr/include/x86_64-linux-gnu/curl -I/opt/homebrew/opt/curl/include/curl

@@ -1,3 +1,6 @@
+val WIN_LIBRARY_PATH =
+    "c:\\msys64\\mingw64\\bin;c:\\Tools\\msys64\\mingw64\\bin;C:\\Tools\\msys2\\mingw64\\bin"
+
 plugins {
     kotlin("multiplatform") version "1.6.10"
 }
@@ -15,6 +18,16 @@ kotlin {
     val nativeTarget = when {
         isMingwX64 -> mingwX64("native")
         else -> throw GradleException("Host OS is not supported in Kotlin/Native.")
+    }
+
+    val curlPaths = if (isMingwX64) {
+        listOf(
+            "C:/msys64/mingw64/include/curl",
+            "C:/Tools/msys64/mingw64/include/curl",
+            "C:/Tools/msys2/mingw64/include/curl"
+        )
+    } else {
+        error("Unknown host name `$hostOs`")
     }
 
     nativeTarget.apply {
@@ -35,6 +48,19 @@ kotlin {
                     Callable { File(javaHome, "include/linux") },
                     Callable { File(javaHome, "include/win32") }
                 )
+            }
+
+            cinterops.create("libcurl") {
+                defFile = File(projectDir, "src/nativeInterop/cinterop/libcurl.def")
+                includeDirs.headerFilterOnly(curlPaths)
+
+                afterEvaluate {
+                    if (this.name == "mingwX64") {
+                        val winTests =
+                            tasks.getByName("mingwX64Test") as org.jetbrains.kotlin.gradle.targets.native.tasks.KotlinNativeTest
+                        winTests.environment("PATH", WIN_LIBRARY_PATH)
+                    }
+                }
             }
         }
     }
