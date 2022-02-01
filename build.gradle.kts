@@ -24,7 +24,7 @@ kotlin {
             }
         }
 
-       /* compilations.getByName("main") {
+        compilations.getByName("main") {
             cinterops.create("jni") { //loads jni.def, that loads java's jni.h
                 packageName = "com.omnys.jni" //This is the package name where jni.h's classes will be available from Kotlin
                 val javaHome = File(System.getenv("JAVA_HOME") ?: System.getProperty("java.home"))
@@ -36,21 +36,11 @@ kotlin {
                     Callable { File(javaHome, "include/win32") }
                 )
             }
-        }*/
+        }
     }
 
-   /* sourceSets {
-        val commonMain by getting
-        val commonTest by getting {
-            dependencies {
-                implementation(kotlin("test"))
-            }
-        }
-        val jvmMain by getting
-        val jvmTest by getting
-        val jsMain by getting
-        val jsTest by getting
+    sourceSets {
         val nativeMain by getting
         val nativeTest by getting
-    }*/
+    }
 }

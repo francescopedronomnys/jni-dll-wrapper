@@ -1,17 +1,18 @@
-package org.jonnyzzz.jni.native
+package com.omnys.jni.native
 
 import kotlinx.cinterop.CPointer
-/*
 import com.omnys.jni.JNIEnvVar
 import com.omnys.jni.jclass
 import com.omnys.jni.jint
 
-@CName("Java_org_jonnyzzz_jni_java_NativeHost_callInt")
+@CName("Java_com_omnys_jni_java_NativeHost_callIncrementInt")
 fun callIncrementInt(env: CPointer<JNIEnvVar>, clazz: jclass, x: jint): jint {
     return x + 1
-}*/
-
-
-fun ciao() : Int {
-    return 1
 }
+
+/*
+class Hello {
+    fun ciao(): Int {
+        return 1
+    }
+}*/
